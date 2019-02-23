@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Billing\PaymentGeteway;
+use App\Concert;
+class ConcertOrderController extends Controller
+{
+	private $paymentGeteway;
+	public function __construct(PaymentGeteway $paymentGeteway){
+		$this->paymentGeteway = $paymentGeteway;
+	}
+    public function store($concertId,Request $request){
+    	$concert = Concert::find($concertId);
+    	
+    	
+    	$this->paymentGeteway->charge($request->ticket_quantity * $concert->ticket_price,$request->_token);
+    	$order = $concert->orderTickets($request->email,$request->ticket_quantity);
+    	
+    	return response()->json([],201);
+    }
+}
