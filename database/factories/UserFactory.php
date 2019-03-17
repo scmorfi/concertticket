@@ -35,6 +35,7 @@ $factory->define(App\Concert::class, function (Faker $faker) {
         'city' => $faker->name,
         'state' => 'ON',
         'zip' => rand(10000,100000),
+        'total_tickets_available' => 20,
         'additional_information' => 'Lorem ipsum dolor sit amet, sea et partem mandamus necessitatibus. Cum ut aeque minimum interesset. Sit persecuti expetendis ut, ius nostro similique consectetuer ea, ponderum perfecto vim an. Partem perfecto urbanitas ea duo, ea agam solum dicit pro, ridens offendit abhorreant in mei.',
     ];
 });
