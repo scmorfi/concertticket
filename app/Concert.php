@@ -29,7 +29,6 @@ class Concert extends Model
         
 
         $tickets = $this->tickets()->available()->take($ticketQuantity)->get();;
-
         if($tickets->count() < $ticketQuantity){
             throw new NotEnoughTicketsException;
             
@@ -50,4 +49,5 @@ class Concert extends Model
     public function ticketsRemaining(){
         return $this->tickets()->available()->count();
     }
+    
 }

@@ -38,8 +38,14 @@ class PurchaseTicketsTest extends TestCase
             "ticket_quantity" => 3,
             "_token" => $this->paymentGeteway->getValidTestTocken()
         ]);
-
         $response->assertStatus(201);
+        $response->assertJson([
+            "email" => "a@b.com",
+            "ticket_quantity" => 3,
+            "amount"  => 4500
+
+
+        ]);
 
         $this->assertEquals(4500, $this->paymentGeteway->totalCharges());
         $order = $concert->orders()->where("email","a@b.com")->first();

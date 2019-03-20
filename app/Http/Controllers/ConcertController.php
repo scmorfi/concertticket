@@ -46,9 +46,10 @@ class ConcertController extends Controller
      */
     public function show($id)
     {
-        // return response([],404);
-        // dd("ss");
+        
         $concert = Concert::publiched()->findOrFail($id);
+
+        $concert->addTickets(3);
         // dd($concert);
         return view('concerts.show',compact('concert'));
     }
