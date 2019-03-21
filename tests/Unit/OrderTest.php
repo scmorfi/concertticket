@@ -49,6 +49,27 @@ class OrderTest extends TestCase
 
         }
 
+        /** @test */
+        public function creating_an_order_from_tickets_and_email_and_amount(){
+
+               $concert = factory(Concert::class)->create();
+
+                $concert->addTickets(5);
+
+                $order = Order::forTickets($concert->findTickets(3), 'a@b.com',4500);
+
+                $this->assertEquals('a@b.com', $order->email);
+
+                $this->assertEquals(3, $order->ticketQuantity());
+
+                $this->assertEquals(4500,$order->amount);
+
+                $this->assertEquals(2, $concert->ticketsRemaining());
+
+
+                 
+        }
+
 
 
 

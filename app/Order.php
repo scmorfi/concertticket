@@ -25,11 +25,25 @@ class Order extends Model
     	$this->delete();
 
     }
+    public static function forTickets($tickets,$email,$amount){
+        $order = self::create([
+
+            "email" => $email,
+            "amount"  => $amount 
+            // "amount" => $tickets->count() * $this->ticket_price
+
+        ]);
+
+        foreach ($tickets as $ticket) {
+            $order->tickets()->save($ticket);
+        }
+        return $order;
+    }
     public function toArray(){
         return [
             "email" => $this->email,
             "ticket_quantity" => $this->ticketQuantity(),
-            "amount" => $this->ticketQuantity() * $this->concert->ticket_price
+            "amount" => $this->amount
         ];
     }
 }
